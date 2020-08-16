@@ -5,39 +5,53 @@
  */
 package controlador;
 
-import com.google.gson.Gson;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.security.GeneralSecurityException;
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.google.gson.Gson;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpSession;
+import modelo.Conexion;
 import modelo.Estudiante;
 import modelo.EstudianteDao;
 import modelo.Google_Token_Claims_Model;
 import modelo.JWTDecoder;
+
 import modelo.Tokens_Model;
 import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.message.BasicNameValuePair;
 
 /**
  *
  * @author jacob
  */
-@WebServlet(name = "ControladorLogin", urlPatterns = {"/ControladorLogin"})
 public class ControladorLogin extends HttpServlet {
-   private String redirectURI="http://localhost:8084/webDinamica/ControladorLogin";
+    private String redirectURI="http://localhost:8084/webDinamica/ControladorLogin";
     private String client_ID="27541583904-heskbclek74h13abqe3cqurmvpanv71n.apps.googleusercontent.com";
     private String client_secret="AH_o-NfWHsSp77m85l7n4sPp";
 
-    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -50,7 +64,7 @@ public class ControladorLogin extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-    
+       
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -65,8 +79,7 @@ public class ControladorLogin extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-   
-           processRequest(request, response);
+        processRequest(request, response);
         
         if(request.getParameter("code")==null){
             request.getRequestDispatcher("index.jsp").forward(request, response);
@@ -148,9 +161,8 @@ public class ControladorLogin extends HttpServlet {
             
         }
         
-        
-        
-    }
+           } 
+    
 
     /**
      * Handles the HTTP <code>POST</code> method.

@@ -13,20 +13,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-
-
-
-
 /**
  *
  * @author jacob
  */
 @WebServlet(name = "ControladorGoogle", urlPatterns = {"/ControladorGoogle"})
 public class ControladorGoogle extends HttpServlet {
-    private String redirectURI="http://localhost:8084/PrimerProyectoAnalisisDeSIistemas2/ControladorLogin";
+
+    private String redirectURI="http://localhost:8084/webDinamica/ControladorLogin";
     private String client_ID="27541583904-heskbclek74h13abqe3cqurmvpanv71n.apps.googleusercontent.com";
-    
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,18 +35,6 @@ public class ControladorGoogle extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ControladorGoogle</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ControladorGoogle at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -67,6 +50,7 @@ public class ControladorGoogle extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        response.sendRedirect("https://accounts.google.com/o/oauth2/v2/auth?client_id="+this.client_ID+"&response_type=code&scope=openid%20email%20profile&redirect_uri="+this.redirectURI+"&state=holahola");
     }
 
     /**
@@ -80,13 +64,7 @@ public class ControladorGoogle extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         response.sendRedirect("https://accounts.google.com/o/oauth2/v2/auth?client_id="+this.client_ID+"&response_type=code&scope=openid%20email%20profile&redirect_uri="+this.redirectURI+"&state=holahola");
-        
         processRequest(request, response);
-        
-        
-        
-        
     }
 
     /**
