@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "ControladorGoogle", urlPatterns = {"/ControladorGoogle"})
 public class ControladorGoogle extends HttpServlet {
-    private String redirectURI="http://localhost:8084/webDinamica/ControladorLogin";
+    private String redirectURI="http://localhost:8084/PrimerProyectoAnalisisDeSIistemas2/ControladorLogin";
     private String client_ID="27541583904-heskbclek74h13abqe3cqurmvpanv71n.apps.googleusercontent.com";
     
     

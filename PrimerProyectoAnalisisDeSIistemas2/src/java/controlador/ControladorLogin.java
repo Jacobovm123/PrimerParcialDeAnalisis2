@@ -5,6 +5,7 @@
  */
 package controlador;
 
+import com.google.gson.Gson;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -18,6 +19,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import modelo.Estudiante;
 import modelo.EstudianteDao;
+import modelo.Google_Token_Claims_Model;
+import modelo.JWTDecoder;
+import modelo.Tokens_Model;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
